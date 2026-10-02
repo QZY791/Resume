@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>个人简历素材库 · 使用说明书</title>
+<style>
+  :root {
+    --bg: #faf7f8;
+    --card: #ffffff;
+    --ink: #3f3739;
+    --ink-2: #6b5f62;
+    --muted: #948689;
+    --line: #efe2e6;
+    --line-2: #e6d5da;
+    --accent: #b5838d;
+    --accent-soft: #f6ecef;
+    --accent-2: #8d9c8a;
+    --warn-bg: #fdf6ec;
+    --warn-line: #f0dcc0;
+    --warn-ink: #8a6a3b;
+    --danger-bg: #fcf1f2;
+    --danger-line: #f0d2d6;
+    --danger-ink: #9b5863;
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    padding: 0 20px 80px;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: "PingFang SC", "Microsoft YaHei", "Hiragino Sans GB", system-ui, -apple-system, sans-serif;
+    font-size: 15px;
+    line-height: 1.85;
+  }
+  .wrap { max-width: 880px; margin: 0 auto; }
+
+  header.hero {
+    max-width: 880px;
+    margin: 0 auto 28px;
+    padding: 44px 0 26px;
+    border-bottom: 1px solid var(--line-2);
+  }
+  header.hero .eyebrow {
+    display: inline-block;
+    font-size: 12px;
+    letter-spacing: .18em;
+    color: var(--accent);
+    background: var(--accent-soft);
+    border-radius: 20px;
+    padding: 4px 14px;
+    margin-bottom: 16px;
+  }
+  header.hero h1 {
+    margin: 0 0 10px;
+    font-size: 30px;
+    font-weight: 650;
+    letter-spacing: .01em;
+  }
+  header.hero p {
+    margin: 0;
+    color: var(--muted);
+    font-size: 14.5px;
+  }
+
+  h2 {
+    margin: 46px 0 14px;
+    font-size: 20px;
+    font-weight: 650;
+    padding-left: 12px;
+    border-left: 4px solid var(--accent);
+    line-height: 1.4;
+  }
+  h3 {
+    margin: 26px 0 8px;
+    font-size: 16px;
+    font-weight: 650;
+    color: var(--ink);
+  }
+  p { margin: 10px 0; }
+  ul, ol { margin: 10px 0; padding-left: 22px; }
+  li { margin: 5px 0; }
+  code {
+    font-family: "Cascadia Mono", Consolas, "Courier New", monospace;
+    font-size: 13px;
+    background: var(--accent-soft);
+    color: #8f5f6b;
+    border-radius: 4px;
+    padding: 1.5px 6px;
+  }
+  kbd {
+    font-family: "Cascadia Mono", Consolas, monospace;
+    font-size: 12.5px;
+    background: #fff;
+    border: 1px solid var(--line-2);
+    border-bottom-width: 2px;
+    border-radius: 5px;
+    padding: 1px 7px;
+    color: var(--ink-2);
+  }
+
+  .card {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 20px 24px;
+    margin: 16px 0;
+  }
+  .card > :first-child { margin-top: 0; }
+  .card > :last-child { margin-bottom: 0; }
+
+  .grid { display: grid; gap: 14px; }
+  @media (min-width: 700px) { .grid.two { grid-template-columns: 1fr 1fr; } }
+
+  .note, .warn, .danger {
+    border-radius: 12px;
+    padding: 14px 18px;
+    margin: 14px 0;
+    font-size: 14px;
+    border: 1px solid;
+  }
+  .note   { background: var(--accent-soft); border-color: var(--line-2); }
+  .warn   { background: var(--warn-bg);   border-color: var(--warn-line); color: var(--warn-ink); }
+  .danger { background: var(--danger-bg); border-color: var(--danger-line); color: var(--danger-ink); }
+  .note > :first-child, .warn > :first-child, .danger > :first-child { margin-top: 0; }
+  .note > :last-child, .warn > :last-child, .danger > :last-child { margin-bottom: 0; }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 14px 0;
+    font-size: 14px;
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+  th, td {
+    text-align: left;
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--line);
+    vertical-align: top;
+  }
+  th { background: #fbf6f7; font-weight: 650; color: var(--ink-2); white-space: nowrap; }
+  tr:last-child td { border-bottom: none; }
+
+  .steps { counter-reset: s; list-style: none; padding-left: 0; }
+  .steps > li {
+    counter-increment: s;
+    position: relative;
+    padding-left: 40px;
+    margin: 12px 0;
+  }
+  .steps > li::before {
+    content: counter(s);
+    position: absolute;
+    left: 0; top: 3px;
+    width: 24px; height: 24px;
+    border-radius: 50%;
+    background: var(--accent);
+    color: #fff;
+    font-size: 13px;
+    font-weight: 650;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+  }
+
+  .toc {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 18px 24px;
+    margin-top: 8px;
+  }
+  .toc ol { margin: 0; padding-left: 20px; columns: 2; column-gap: 32px; }
+  @media (max-width: 560px) { .toc ol { columns: 1; } }
+  .toc a { color: var(--ink-2); text-decoration: none; }
+  .toc a:hover { color: var(--accent); }
+
+  .flow { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin: 12px 0; }
+  .flow .chip {
+    background: var(--accent-soft);
+    border: 1px solid var(--line-2);
+    border-radius: 8px;
+    padding: 5px 12px;
+    font-size: 13.5px;
+    color: #8f5f6b;
+    white-space: nowrap;
+  }
+  .flow .arrow { color: var(--line-2); font-size: 14px; }
+
+  footer {
+    max-width: 880px;
+    margin: 60px auto 0;
+    padding-top: 20px;
+    border-top: 1px solid var(--line-2);
+    color: var(--muted);
+    font-size: 13px;
+  }
+
+  @media print {
+    body { background: #fff; padding: 0; font-size: 12.5px; }
+    header.hero { padding-top: 0; }
+    .card, .toc, table, .note, .warn, .danger { break-inside: avoid; }
+    h2 { break-after: avoid; }
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <span class="eyebrow">使用说明书</span>
+  <h1>个人简历素材库</h1>
+  <p>把零散的经历攒成素材库，勾一勾就能拼出简历，导出成招聘系统能读的 PDF。全部数据只存在你自己这台电脑的浏览器里。</p>
+</header>
+
+<div class="wrap">
+
+  <div class="toc">
+    <ol>
+      <li><a href="#start">三分钟上手</a></li>
+      <li><a href="#map">界面总览</a></li>
+      <li><a href="#flow">四个核心流程</a></li>
+      <li><a href="#ai">AI 整理怎么配</a></li>
+      <li><a href="#pdf">导出 PDF</a></li>
+      <li><a href="#manage">管理与设置</a></li>
+      <li><a href="#backup">备份与恢复</a></li>
+      <li><a href="#data">数据到底存在哪</a></li>
+      <li><a href="#faq">常见问题</a></li>
+      <li><a href="#dev">想改代码 / 更新版本</a></li>
+      <li><a href="#limit">已知限制与后续计划</a></li>
+    </ol>
+  </div>
+
+  <h2 id="start">1. 三分钟上手</h2>
+
+  <p>整个网站就在 <code>交付包</code> 这个文件夹里，双击一个文件就能用，不需要安装、不需要联网。</p>
+
+  <div class="card">
+    <h3 style="margin-top:0">启动</h3>
+    <ol class="steps">
+      <li>打开 <code>交付包</code> 文件夹，<b>双击 <code>启动.bat</code></b>。</li>
+      <li>会弹出一个黑色命令行窗口，上面印着访问地址，例如
+        <code>http://127.0.0.1:8888/</code>。</li>
+      <li>浏览器通常会自动打开。如果没自动开，把这个地址复制到浏览器地址栏回车即可。</li>
+    </ol>
+    <p style="margin-bottom:0"><b>关闭</b>：直接关掉那个黑色窗口，或在窗口里按 <kbd>Ctrl</kbd> + <kbd>C</kbd>。关掉之后浏览器里就打不开了，这是正常的。</p>
+  </div>
+
+  <div class="note">
+    <p><b>为什么必须用这个 <code>启动.bat</code>，不能直接双击网页文件？</b></p>
+    <p style="margin-bottom:0">这是个单页应用，直接用 <code>file://</code> 打开网页文件会出两个问题：刷新页面就报 404；部分浏览器还会禁用本地数据库，导致数据存不进去。<code>启动.bat</code> 只是在你自己电脑上起一个仅本机可见的小服务（<code>127.0.0.1</code>，外网访问不到），把这些问题绕开。</p>
+  </div>
+
+  <h3>关于 Node.js</h3>
+  <p><code>启动.bat</code> 需要一个叫 Node.js 的运行环境。它启动时会按顺序自动去找：</p>
+  <ol>
+    <li>系统 <code>PATH</code> 里的 <code>node.exe</code>；</li>
+    <li>WorkBuddy 内置的 Node（<code>%USERPROFILE%\.workbuddy\binaries\node\versions\</code> 下取最新版本）；</li>
+    <li>常见的安装位置（<code>C:\Program Files\nodejs\</code> 等）。</li>
+  </ol>
+  <p>三处都没找到时，窗口会提示你去 <code>https://nodejs.org/</code> 下载 LTS 版本，装完再双击一次即可。<b>本机已经装好了，正常情况你不用管这一步。</b></p>
+
+  <div class="warn">
+    <p><b>端口被占用怎么办？</b></p>
+    <p style="margin-bottom:0">默认端口是 <code>8888</code>。如果它被别的程序占了、或者被 Windows 保留（装了 Hyper-V / WSL 的机器上常见），服务器会自己往后顺延，并把实际用的地址印在窗口里。<b>以窗口里印出来的地址为准。</b>必要时把端口号往后调几位也行，见第 10 节的说明。</p>
+  </div>
+
+  <h2 id="map">2. 界面总览</h2>
+
+  <p>首页是一张卡片式的入口地图，分两组共 8 个入口：</p>
+
+  <table>
+    <thead><tr><th>分组</th><th>入口</th><th>干什么用</th></tr></thead>
+    <tbody>
+      <tr><td rowspan="4">核心流程<br><span style="color:var(--muted);font-size:13px">从上到下走一遍，就有一份简历了</span></td>
+          <td>01 个人资料库</td><td>姓名、联系方式、教育经历、技能、证书、链接 —— 填一次，之后每份简历都复用</td></tr>
+      <tr><td>02 经历管理</td><td>碎片化记录项目 / 比赛 / 实习 / 科研 / 校园 / 证书等经历，支持 STAR 结构化与状态流转</td></tr>
+      <tr><td>03 素材与附件</td><td>上传作品截图、笔记 PDF / TXT / MD，并挂到相关经历上</td></tr>
+      <tr><td>04 生成简历</td><td>勾选经历 → 组装 → 编辑 → 导出 PDF</td></tr>
+      <tr><td rowspan="4">管理与设置</td>
+          <td>回收站</td><td>被删的经历 / 素材 / 简历草稿都在这里，可恢复或彻底删除</td></tr>
+      <tr><td>AI 整理设置</td><td>填一家大模型服务的接口地址和密钥，用来把原始笔记整理成 STAR</td></tr>
+      <tr><td>数据完整性检查</td><td>扫描孤立引用、双向关联不对称等问题，可逐条修复</td></tr>
+      <tr><td>数据与隐私安全</td><td>看占用空间、导出备份、导入恢复、清空全部数据</td></tr>
+    </tbody>
+  </table>
+
+  <h2 id="flow">3. 四个核心流程</h2>
+
+  <h3>流程一 · 先把个人资料填一次</h3>
+  <p>进「01 个人资料库」，把姓名、手机、邮箱、所在地、教育经历、技能、语言、证书、链接填好保存。这部分是可复用的底座，之后每份简历都从这里取。</p>
+
+  <h3>流程二 · 往里攒经历</h3>
+  <p>进「02 经历管理」，点新建，选类型填内容。两条实用建议：</p>
+  <ul>
+    <li><b>「原始笔记」尽量写全。</b>哪怕是大白话、时间线混乱也没关系。这一栏是后续 AI 整理的唯一输入，写得多，整理出来的东西才有料。</li>
+    <li><b>背景 / 目标 / 行动 / 成果（STAR）四栏可以手动填，也可以让 AI 填。</b>填完记得在「来源附件」处把相关素材挂上，之后翻经历时能一眼看到当时的截图或笔记。</li>
+  </ul>
+
+  <p>每条经历有三种状态，通过列表右侧的按钮流转：</p>
+  <table>
+    <thead><tr><th>状态</th><th>含义</th></tr></thead>
+    <tbody>
+      <tr><td><span style="color:var(--muted)">草稿</span></td><td>还在写，或者还没想清楚要不要用</td></tr>
+      <tr><td><span style="color:var(--accent-2)">已确认</span></td><td>内容核实过了。<b>组装简历时从这里挑</b></td></tr>
+      <tr><td><span style="color:var(--muted)">已归档</span></td><td>暂时不用了，但不想删</td></tr>
+    </tbody>
+  </table>
+  <p>任意状态都能退回草稿。归档不等于删除，记录会一直在。</p>
+
+  <h3>流程三 · 上传素材</h3>
+  <p>进「03 素材与附件」，拖拽或点选上传。限额是：</p>
+  <table>
+    <thead><tr><th>类型</th><th>格式</th><th>单个大小</th></tr></thead>
+    <tbody>
+      <tr><td>图片</td><td>JPG / PNG / GIF / WebP</td><td>≤ 2 MB</td></tr>
+      <tr><td>文档</td><td>PDF / TXT / MD</td><td>≤ 5 MB</td></tr>
+    </tbody>
+  </table>
+  <p>上传后可以在素材详情里写摘要、填来源日期、关联到一条或多条经历。关联是双向的 —— 在经历那边也能看到挂上的素材。素材主要用于留档和辅助回忆，不会直接出现在导出的简历里。</p>
+
+  <h3>流程四 · 组装并导出简历</h3>
+  <p>进「04 生成简历」，点新建，按 6 个区块往下填：</p>
+  <div class="flow">
+    <span class="chip">1 基本信息</span><span class="arrow">→</span>
+    <span class="chip">2 勾选经历</span><span class="arrow">→</span>
+    <span class="chip">3 栏目与顺序</span><span class="arrow">→</span>
+    <span class="chip">4 模板</span><span class="arrow">→</span>
+    <span class="chip">5 内容微调</span><span class="arrow">→</span>
+    <span class="chip">6 AI 生成文案（可选）</span>
+  </div>
+  <ul>
+    <li><b>基本信息</b>：简历语言（中文 / 英文）、目标岗位，还可以粘贴岗位 JD 供 AI 参照。</li>
+    <li><b>勾选经历</b>：从「已确认」的经历里挑。</li>
+    <li><b>栏目与顺序</b>：调整简历上各栏的先后，也能关掉不想显示的栏目（至少要留一个）。</li>
+    <li><b>模板</b>：目前一种默认版式。</li>
+    <li><b>内容微调</b>：逐条改自我介绍和经历正文的措辞。想恢复成从经历库自动拼出来的版本，点重建即可。</li>
+    <li><b>AI 生成文案</b>：可选增强。没配 AI 也能正常保存和导出。</li>
+  </ul>
+  <p>保存后草稿落到本地库。回到「04 生成简历」列表，点进某份草稿就是<b>编辑器</b>：左边改内容，右边实时预览 A4 效果，顶部工具栏显示「共 N 页」。</p>
+
+  <h2 id="ai">4. AI 整理怎么配</h2>
+
+  <p>这一块是<b>可选的</b>。不配也不影响任何其他功能，只是少了「把大白话笔记自动整理成 STAR」和「按岗位生成文案」这两个帮手。</p>
+
+  <p>进「AI 整理设置」，填三项必填：</p>
+  <table>
+    <thead><tr><th>字段</th><th>说明</th></tr></thead>
+    <tbody>
+      <tr><td>接口地址 baseUrl</td><td>大模型服务的地址。用上面的「供应商预设」可以一键填好前两项</td></tr>
+      <tr><td>模型名 model</td><td>如 <code>deepseek-chat</code> / <code>gpt-4o-mini</code> / <code>qwen-plus</code></td></tr>
+      <tr><td>API Key</td><td>去对应服务商后台申领，粘贴进去</td></tr>
+      <tr><td>温度 temperature</td><td>整理任务建议 <b>0.2 ~ 0.4</b>，越低越稳定、越不容易自己发挥</td></tr>
+    </tbody>
+  </table>
+
+  <p>内置了三个预设，选中会自动填好地址和模型：</p>
+  <ul>
+    <li><b>DeepSeek</b> —— <code>https://api.deepseek.com</code>，模型 <code>deepseek-chat</code></li>
+    <li><b>OpenAI</b> —— <code>https://api.openai.com/v1</code>，模型 <code>gpt-4o-mini</code></li>
+    <li><b>通义千问（兼容模式）</b> —— 阿里云 DashScope 的 OpenAI 兼容端点，模型 <code>qwen-plus</code></li>
+  </ul>
+
+  <p>填完点<b>「测试连通性」</b>，通了再点保存。之后在经历表单里就能看到「AI 整理原始笔记」按钮：点开 → 带着原文的弹窗打开 → 点开始整理 → 核对结果 → 「应用结果」回填到 STAR 四栏。</p>
+
+  <div class="warn">
+    <p><b>两个必须知道的点：</b></p>
+    <ul style="margin-bottom:0">
+      <li><b>API Key 是明文存在浏览器里的</b>（localStorage），只在本机。它<b>不会</b>进入备份文件，换电脑导入备份后需要重新填一次。别在公用电脑上配置。</li>
+      <li><b>部分服务商不允许浏览器直连</b>（跨域限制），表现为测试连通性时报网络错误。这种情况换一家支持浏览器直连的服务商，或改用自己的中转地址。</li>
+    </ul>
+  </div>
+
+  <h2 id="pdf">5. 导出 PDF</h2>
+
+  <p>在简历编辑器右上角点<b>「导出 PDF」</b>：</p>
+
+  <ol class="steps">
+    <li>先弹一个说明框，点「打开打印对话框」。（点它之前系统会自动保存一次，保证导出和库里内容一致。）</li>
+    <li>浏览器打开系统的打印对话框。关键三项：
+      <ul>
+        <li><b>目标 / 打印机 → 选「另存为 PDF」</b></li>
+        <li><b>边距 → 选「无」</b>（页边距已经做在内容里了，再选默认边距会串版）</li>
+        <li><b>缩放 → 保持 100%</b></li>
+      </ul>
+    </li>
+    <li>点保存，选个目录存下来。</li>
+  </ol>
+
+  <p>导出的是<b>矢量 PDF</b>：文字可以选中、可以复制、能被招聘系统解析，不是一张图片。页面里的浅粉底色已强制保留，<b>不需要</b>去勾「背景图形」（勾了也无妨）。</p>
+
+  <div class="note">
+    <p><b>怎么判断导对了？</b></p>
+    <ul style="margin-bottom:0">
+      <li>打开 PDF，用鼠标拖选一段文字 —— 能选中的就是矢量输出。</li>
+      <li>对照编辑器顶部的「共 N 页」：PDF 页数应该和它一致，且最后几行没被裁掉。</li>
+    </ul>
+  </div>
+
+  <div class="warn">
+    <p style="margin-bottom:0"><b>如果 PDF 里出现半页空白或内容被截断</b>，通常是打印对话框里「边距」被改成了默认值（不是「无」）。重新导出并确认边距选「无」即可。</p>
+  </div>
+
+  <h2 id="manage">6. 管理与设置</h2>
+
+  <h3>回收站</h3>
+  <p>删除经历、素材、简历草稿时不会真的删掉，而是先进回收站。里面有「恢复」和「彻底删除」两个动作，也支持一键清空。<b>要真正的空间回收和不可恢复的删除，得走「彻底删除」。</b></p>
+
+  <h3>数据完整性检查</h3>
+  <p>进页面会自动扫一遍，检查两类问题：引用了不存在的记录（孤立引用）、两边关联关系对不上（双向关联不对称）。每条问题都能单独点「修复」，<b>修复只调整引用数组，不会删掉你的经历、素材或简历草稿本身</b>。报告可以导出。</p>
+
+  <h3>数据与隐私安全</h3>
+  <ul>
+    <li><b>存储统计</b>：看各类数据占用多少空间，回收站里的条目也占空间，建议定期清空。</li>
+    <li><b>导出备份</b>：把全部数据导出成一个 JSON 文件。</li>
+    <li><b>导入恢复</b>：从 JSON 备份恢复，导入前会先给你看一眼要导入什么。</li>
+    <li><b>清空所有数据</b>：需要手动输入「删除」两字才能确认，做完不可恢复。</li>
+  </ul>
+
+  <h2 id="backup">7. 备份与恢复（强烈建议养成习惯）</h2>
+
+  <p>数据只存在浏览器本地，<b>没有任何服务器帮你存</b>。这意味着：清一次浏览数据、换一次浏览器、重装一次系统，数据就没了。所以：</p>
+
+  <ul>
+    <li>每周（或每写完几条重要经历）去「数据与隐私安全」点一次<b>「导出备份」</b>，文件名形如 <code>resume-material-backup-20260930-173000.json</code>，存到网盘或别的盘。</li>
+    <li>换电脑时：老机器导出备份 → 新机器装好交付包 → 进「数据与隐私安全」用<b>「导入备份」</b>读进去。</li>
+  </ul>
+
+  <div class="note">
+    <p style="margin-bottom:0"><b>导入是「合并导入」，不是覆盖。</b>同一条记录（id 相同）会被备份里的版本覆盖，备份里没有的记录会原样保留。所以导入一份旧备份不会把新加的内容清掉，但被覆盖的那几条会回到备份时的样子。</p>
+  </div>
+
+  <h2 id="data">8. 数据到底存在哪</h2>
+
+  <table>
+    <thead><tr><th>内容</th><th>存在哪</th><th>会不会进备份</th></tr></thead>
+    <tbody>
+      <tr><td>个人资料、经历、素材、简历草稿</td><td>本机浏览器 IndexedDB，库名 <code>resume-material-db</code></td><td>会</td></tr>
+      <tr><td>素材的图片和文件本体</td><td>同上（以 Base64 形式存在记录里）</td><td>会</td></tr>
+      <tr><td>AI 的 API Key 与配置</td><td>本机浏览器 localStorage</td><td><b>不会</b></td></tr>
+    </tbody>
+  </table>
+
+  <p>「库名 <code>resume-material-db</code>」的意义：它和其他网站的存储是隔离的，别的网站读不到，这个网站也只读自己的。</p>
+
+  <div class="danger">
+    <p><b>会让数据「看起来消失」的操作：</b></p>
+    <ul style="margin-bottom:0">
+      <li>换一个浏览器打开（Chrome 和 Edge 的本地库互不相通）</li>
+      <li>用无痕 / InPrivate 窗口</li>
+      <li>清理「Cookie 及其他网站数据」并勾选了网站存储</li>
+      <li>卸载重装浏览器</li>
+    </ul>
+  </div>
+  <p>这些情况下数据并没有被上传到任何地方（本来也没有服务器），只是你换了一个空的本地库。固定用一个浏览器的普通窗口使用，并定期导出备份，就不会踩到。</p>
+
+  <h2 id="faq">9. 常见问题</h2>
+
+  <table>
+    <thead><tr><th>现象</th><th>原因与处理</th></tr></thead>
+    <tbody>
+      <tr>
+        <td>双击 <code>启动.bat</code> 窗口一闪就没了</td>
+        <td>多半是没找到 Node.js。右键用记事本打开 <code>启动.bat</code> 看不到有用信息；正确做法是在命令行里跑一次看报错，或直接按提示装一遍 Node.js LTS。</td>
+      </tr>
+      <tr>
+        <td>提示 <code>Node.js was not found</code></td>
+        <td>按窗口里给的网址装 Node.js（选 LTS 版），装完重新双击 <code>启动.bat</code>。</td>
+      </tr>
+      <tr>
+        <td>浏览器打开了但页面空白 / 打不开</td>
+        <td>先看黑窗口里印的实际地址是不是和你访问的一致（端口可能顺延过）。仍不行就关掉窗口重开一次。</td>
+      </tr>
+      <tr>
+        <td>页面能开，但数据都是空的</td>
+        <td>你换了浏览器、用了无痕窗口，或清了浏览数据。回到常用浏览器的普通窗口，或用备份导入恢复。</td>
+      </tr>
+      <tr>
+        <td>提示端口被占用</td>
+        <td>不用管，服务器会自动换端口，实际地址以窗口里印的为准。</td>
+      </tr>
+      <tr>
+        <td>AI 测试连通性报 401 / 404 / 超时 / 网络错误</td>
+        <td>401 是 Key 不对；404 是地址或模型名不对；超时和网络错误多半是服务商不允许浏览器直连（跨域）。逐项核对后再试。</td>
+      </tr>
+      <tr>
+        <td>导出的 PDF 和预览不一样 / 后半页空白</td>
+        <td>打印对话框里「边距」要选「无」、「缩放」要 100%。这两项改对了通常就一致了。</td>
+      </tr>
+      <tr>
+        <td>素材上传失败</td>
+        <td>检查格式和大小：图片限 JPG / PNG / GIF / WebP 且 ≤ 2MB，文档限 PDF / TXT / MD 且 ≤ 5MB。</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2 id="dev">10. 想改代码 / 更新版本</h2>
+
+  <p>源码工程在 <code>D:\个人简历素材库\A</code>（<code>交付包</code> 只是它的构建产物）。</p>
+
+  <table>
+    <thead><tr><th>命令</th><th>作用</th></tr></thead>
+    <tbody>
+      <tr><td><code>npm install</code></td><td>装依赖（首次或依赖变动后）</td></tr>
+      <tr><td><code>npm run dev</code></td><td>起开发服务器，改代码即时热更新，默认 <code>localhost:5173</code></td></tr>
+      <tr><td><code>npm run build</code></td><td>类型检查 + 打包，产物在 <code>dist/</code></td></tr>
+    </tbody>
+  </table>
+
+  <p><b>改完代码后更新交付包的步骤</b>：跑 <code>npm run build</code>，把 <code>dist\</code> 里的全部内容复制覆盖到 <code>交付包\www\</code>，再双击 <code>启动.bat</code> 即可。交付包里的 <code>server.mjs</code> 与 <code>启动.bat</code> 不需要重新生成。</p>
+
+  <p><b>想改端口</b>：编辑 <code>交付包\server.mjs</code>，把 <code>const START_PORT = 8888</code> 改成你要的数字。注意避开 Windows 给 Hyper-V / WSL 保留的端口段，用管理员命令行执行 <code>netsh interface ipv4 show excludedportrange protocol=tcp</code> 可以查到保留范围。</p>
+
+  <h3>技术档案</h3>
+  <table>
+    <thead><tr><th>项</th><th>内容</th></tr></thead>
+    <tbody>
+      <tr><td>技术栈</td><td>Vue 3 + Vite + Element Plus + TypeScript，纯前端，无后端</td></tr>
+      <tr><td>本地存储</td><td>localforage 封装的 IndexedDB；数据访问被抽成 StoragePort 接口，换实现不影响业务代码</td></tr>
+      <tr><td>样式引入</td><td>Element Plus 按需引入（模板组件 / v-loading 指令自动解析，ElMessage 等服务式 API 自动导入）</td></tr>
+      <tr><td>PDF 导出</td><td>浏览器原生打印（矢量输出），配 A4 固定尺寸页面盒 + 自研贪心分页</td></tr>
+      <tr><td>页面路由</td><td>history 模式，所以需要本地服务器提供回退，不能 file:// 直接打开</td></tr>
+    </tbody>
+  </table>
+
+  <h2 id="limit">11. 已知限制与后续计划</h2>
+
+  <h3>当前版本的限制</h3>
+  <ul>
+    <li><b>单机单浏览器。</b>没有账号体系，数据不跨设备。换设备要靠导出 / 导入备份。</li>
+    <li><b>简历模板只有一种。</b>版式后续会扩展。</li>
+    <li><b>服务商直连限制。</b>AI 整理能不能用，取决于该服务商是否允许浏览器直接请求。</li>
+    <li><b>回收站清空后不可恢复。</b>「彻底删除」和「清空回收站」都是真删。</li>
+  </ul>
+
+  <h3>后续计划</h3>
+  <ul>
+    <li><b>跨设备同步与服务端存储。</b>数据访问层已经预留了替换点（StoragePort / AssetBlobStore），届时换一个适配器实现即可，业务模块不用改。</li>
+    <li><b>更多简历版式</b>，以及对外导出 JSON Resume 标准格式，方便投给支持该格式的招聘系统。</li>
+  </ul>
+
+  <footer>
+    <p>个人简历素材库 · 使用说明书 &nbsp;|&nbsp; 全部数据仅存于本机浏览器，不经过任何服务器</p>
+    <p style="margin-bottom:0">建议固定用一个浏览器的普通窗口，并每周导出一次备份。</p>
+  </footer>
+
+</div>
+</body>
+</html>
